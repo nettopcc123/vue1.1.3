@@ -1,8 +1,33 @@
 
 <template>
   <div class="newlists" id="newlists">
-        <vue-newban1></vue-newban1>
-        <vue-banner01></vue-banner01>
+        <!-- <vue-newban1></vue-newban1>
+        <vue-banner01></vue-banner01> -->
+        <ul class="nlist npad">
+            <li v-for="(value, key) in newList" v-if="key < 2">
+                <router-link :to="{ name: 'newsMore1', params: { articid: value.Id , page: num, content: value.Content}}">
+                <span class="nimg_l"><img :src="require('./../components/img/ban/e/' + value.Image +'.jpg')"></span>
+                <span class="newsCtn_l">
+                    <h2 class="ntit">{{ value.Title | filter | restr }}</h2>
+                    <p class="ntb"><span class="nname">消息来源： {{ value.Source }} </span></p>
+                    <i class="mark2">{{ value.username }}</i>
+                </span>
+                </router-link>
+            </li>
+        </ul>
+        <ul class="nlist npad">
+            <li v-for="(value, key) in newList" v-if="key == 3">
+                <router-link :to="{ name: 'newsMore1', params: { articid: value.Id , page: num, content: value.Content}}">
+                <span class="newsCtn_m">
+                    <h2 class="ntit_m">{{ value.Title | filter | restr }}</h2>
+                    <p class="ntb"><span class="nname">消息来源： {{ value.Source }} </span></p>
+                    <i class="mark2">{{ value.username }}</i>
+                </span>
+                <span class="nimg_m"><img :src="require('./../components/img/ban/e/' + value.Image +'.jpg')"></span>
+                </router-link>
+            </li>
+        </ul>
+
         <ul class="nlist">
             <li v-for="(value, key) in newList">
                 <router-link :to="{ name: 'newsMore1', params: { articid: value.Id , page: num, content: value.Content}}">
@@ -177,6 +202,34 @@ export default {
   width:62%;
   float:left;
 }
+
+.nimg_l{
+  width: 35%;
+  float:left;
+}
+.newsCtn_l{
+  width:62%;
+  float:right;
+}
+
+.nimg_m{
+  width: 100%;
+}
+.nimg_m img{
+  width: 100%;
+}
+.newsCtn_m{
+  width:100%;
+}
+.ntit_m{
+  font-size: 0.18rem;
+  color:#2a2a2a;
+  font-weight: normal;
+  height: 0.28rem;
+  overflow: hidden;
+  line-height: 0.28rem;
+}
+
 .nlist{
   display:block;
   text-align: center;
